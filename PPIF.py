@@ -21,7 +21,7 @@ def resizing(image):
 
     height_new = int(round(width_new / aspect_ratio))
 
-    print(width_new, height_new)
+    # print(width_new, height_new)
 
     standard_src = cv2.resize(image, (width_new, height_new))
 

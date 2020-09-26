@@ -1,6 +1,8 @@
 import PPIF as pf
 import cv2
 import numpy as np
+import glob
+import os 
 
 
 def estimation_area(image):
@@ -15,7 +17,7 @@ def estimation_area(image):
     height_w, width_w = image.shape[0:2]
     whole_area = height_w * width_w
     relation_area = area / whole_area
-    print(relation_area)
+    # print(relation_area)
 
     area_character = relation_area
     bias = area_character * 0.50
@@ -48,6 +50,7 @@ def detecting_characters(contour, image_print, number_file):
             rectangle_char = (x, y, w, h)                   # x = UPPER - LEFT CORNER OF THESE RECTANGLE
             character.append(rectangle_char)                # FILLING THE CHARACTER VARIABLE.
 
+
     image_plate_char = image
 
     return image_plate_char, character
@@ -55,18 +58,31 @@ def detecting_characters(contour, image_print, number_file):
 
 def call_image():
 
-    file = './fuente/matricula_96.jpg'
+    file = './fuente/matricula_121.jpg'
     src = cv2.imread(file)
 
     return src
 
 
+
+def calculting_name():
+
+    list_of_files = glob.glob('./Base_datos/*') # * means all if need specific format then *.csv
+    latest_file = max(list_of_files, key=os.path.getctime)
+    _, name_file = os.path.split(latest_file)
+    number, _ = os.path.splitext(name_file)
+    print(latest_file)
+    name_number = int(number) + 1
+
+    return name_number
+
+
 def run():
-    num = 542
 
     source = call_image()
+    name_number = calculting_name()
     aux = pf.resizing(source)
-    no_noise = pf.softing_noise(source, 15)
+    no_noise = pf.softing_noise(source, 21)
     resize = pf.resizing(no_noise)
 
     cv2.imshow('Image', resize)
@@ -77,16 +93,16 @@ def run():
     cv2.waitKey(0)
 
     contour, _ = cv2.findContours(to_detect, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
-    print(len(contour))
     detecting, character = detecting_characters(contour, resize, _)
     character = pf.org_character(character)
     to_cut = pf.preparing_tocut(aux)
     segmented = pf.cutting_characters(character, to_cut)
 
+
     for img in segmented:
 
-        cv2.imwrite('./Base_datos/' + str(num) + '.jpg',img)
-        num = num + 1
+        cv2.imwrite('./Base_datos/' + str(name_number) + '.jpg', img)
+        name_number = name_number + 1
 
 
 if __name__ == '__main__':
