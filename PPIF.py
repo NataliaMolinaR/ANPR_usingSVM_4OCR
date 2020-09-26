@@ -15,6 +15,22 @@ def calculting_name():
     return name_number
 
 
+def resizing(image, image_2, width_desire):
+
+    height, width = image.shape[0:2]
+
+    aspect_ratio = (width / height)
+
+    width_new = width_desire
+
+    height_new = int(round(width_new / aspect_ratio))
+
+    standard_src = cv2.resize(image, (width_new, height_new))
+
+    image_tocut = cv2.resize(image_2,(width_new, height_new))
+
+    return standard_src, image_tocut
+
 def softing_noise(image, kn):
     """ It Softing the noise in the original image. kn  is the dimension  of the Kernel.I recommend you to use kn=5 for
     majority of pictures """
@@ -22,24 +38,6 @@ def softing_noise(image, kn):
     s_noise = cv2.GaussianBlur(image, (kn, kn), 0)
 
     return s_noise
-
-
-def resizing(image, image_tocut):
-
-    height, width = image.shape[0:2]
-
-    aspect_ratio = (width / height)
-
-    width_new = 150
-
-    height_new = int(round(width_new / aspect_ratio))
-
-    # print(width_new, height_new)
-
-    standard_src = cv2.resize(image, (width_new, height_new))
-
-    return standard_src, standard_src
-
 
 
 def threshold_image(image):
@@ -96,6 +94,32 @@ def estimation_area(image, width, height):
     min_aspect = aspect_ratio - aspect_bias
 
     return low_limit, high_limit, max_aspect, min_aspect, whole_area
+
+
+def detecting_characters(contour, image_print, number_file):
+
+    character = []
+    image = image_print.copy()
+    widths = [17, 10]
+    for w in widths:
+        low_limit, high_limit, max_aspect, min_aspect, whole_area = estimation_area(image_print, w, 35)
+        for c in contour:
+            x, y, w, h = cv2.boundingRect(c)
+            area_contour = w * h
+            aspect_ratio = w / h
+            if (area_contour/whole_area >= low_limit) and (area_contour/whole_area <= high_limit) and (aspect_ratio < max_aspect) and (aspect_ratio > min_aspect):
+                cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)  # DRAWING THE PLATE'S RECTANGLE
+                # print(w, h)
+                # cv2.imshow('Dibujando', image)
+                # cv2.waitKey(0)
+                rectangle_char = (x, y, w, h)                   # x = UPPER - LEFT CORNER OF THESE RECTANGLE
+                character.append(rectangle_char)                # FILLING THE CHARACTER VARIABLE.
+
+
+    image_plate_char = image
+
+    return image_plate_char, character
+
 
 def filling_white(image, smaller_image):
 
@@ -176,12 +200,9 @@ def cutting_characters(character, image_2cut):
             cv2.destroyAllWindows()
     return preparing
 
+
 def preparing_tocut(image):
 
-    # image = pf.softing_noise(image, 5)
-    # image = pf.dilating_image(image, 7, 1)
     _, image = threshold_image(image)
-    # image = erode_image(image, 7, 1)
-    # image = cv2.Canny(image, 80, 80)
 
     return image
