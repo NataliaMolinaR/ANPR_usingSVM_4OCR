@@ -1,5 +1,18 @@
 import cv2
 import numpy as np
+import os
+import glob
+
+
+def calculting_name():
+
+    list_of_files = glob.glob('./Prueba/*') # * means all if need specific format then *.csv
+    latest_file = max(list_of_files, key=os.path.getctime)
+    _, name_file = os.path.split(latest_file)
+    number, _ = os.path.splitext(name_file)
+    name_number = int(number) + 1
+
+    return name_number
 
 
 def softing_noise(image, kn):
@@ -11,7 +24,7 @@ def softing_noise(image, kn):
     return s_noise
 
 
-def resizing(image):
+def resizing(image, image_tocut):
 
     height, width = image.shape[0:2]
 
@@ -25,7 +38,7 @@ def resizing(image):
 
     standard_src = cv2.resize(image, (width_new, height_new))
 
-    return standard_src
+    return standard_src, standard_src
 
 
 
@@ -59,6 +72,30 @@ def erode_image(image, kn, i):
 
     return dilation
 
+def estimation_area(image, width, height):
+    # w 17 h 35 prom
+    # w 7 h 35 uno
+    # w 10 h 35 I
+    # width = 17
+    # height = 35
+
+    area = width * height
+    height_w, width_w = image.shape[0:2]
+    whole_area = height_w * width_w
+    relation_area = area / whole_area
+    # print(relation_area)
+
+    area_character = relation_area
+    bias = area_character * 0.50
+    low_limit = area_character - bias
+    high_limit = area_character + bias
+
+    aspect_ratio = width / height
+    aspect_bias = aspect_ratio * 0.25
+    max_aspect = aspect_ratio + aspect_bias
+    min_aspect = aspect_ratio - aspect_bias
+
+    return low_limit, high_limit, max_aspect, min_aspect, whole_area
 
 def filling_white(image, smaller_image):
 
