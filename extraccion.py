@@ -5,13 +5,13 @@ import glob
 import os 
 
 
-def estimation_area(image):
+def estimation_area(image, width, height):
     # w 17 h 35 prom
     # w 7 h 35 uno
     # w 10 h 35 I
 
-    width = 17
-    height = 35
+    # width = 17
+    # height = 35
 
     area = width * height
     height_w, width_w = image.shape[0:2]
@@ -36,19 +36,20 @@ def detecting_characters(contour, image_print, number_file):
 
     character = []
     image = image_print.copy()
-    low_limit, high_limit, max_aspect, min_aspect, whole_area = estimation_area(image_print)
-
-    for c in contour:
-        x, y, w, h = cv2.boundingRect(c)
-        area_contour = w * h
-        aspect_ratio = w / h
-        if (area_contour/whole_area >= low_limit) and (area_contour/whole_area <= high_limit) and (aspect_ratio < max_aspect) and (aspect_ratio > min_aspect):
-            cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)  # DRAWING THE PLATE'S RECTANGLE
-            # print(w, h)
-            # cv2.imshow('Dibujando', image)
-            # cv2.waitKey(0)
-            rectangle_char = (x, y, w, h)                   # x = UPPER - LEFT CORNER OF THESE RECTANGLE
-            character.append(rectangle_char)                # FILLING THE CHARACTER VARIABLE.
+    widths = [17, 10]
+    for w in widths:
+        low_limit, high_limit, max_aspect, min_aspect, whole_area = estimation_area(image_print, w, 35)
+        for c in contour:
+            x, y, w, h = cv2.boundingRect(c)
+            area_contour = w * h
+            aspect_ratio = w / h
+            if (area_contour/whole_area >= low_limit) and (area_contour/whole_area <= high_limit) and (aspect_ratio < max_aspect) and (aspect_ratio > min_aspect):
+                cv2.rectangle(image, (x, y), (x + w, y + h), (255, 0, 0), 2)  # DRAWING THE PLATE'S RECTANGLE
+                # print(w, h)
+                # cv2.imshow('Dibujando', image)
+                # cv2.waitKey(0)
+                rectangle_char = (x, y, w, h)                   # x = UPPER - LEFT CORNER OF THESE RECTANGLE
+                character.append(rectangle_char)                # FILLING THE CHARACTER VARIABLE.
 
 
     image_plate_char = image
@@ -58,7 +59,7 @@ def detecting_characters(contour, image_print, number_file):
 
 def call_image():
 
-    file = './fuente/matricula_121.jpg'
+    file = './fuente/matricula_118.jpg'
     src = cv2.imread(file)
 
     return src
@@ -67,11 +68,10 @@ def call_image():
 
 def calculting_name():
 
-    list_of_files = glob.glob('./Base_datos/*') # * means all if need specific format then *.csv
+    list_of_files = glob.glob('./Prueba/*') # * means all if need specific format then *.csv
     latest_file = max(list_of_files, key=os.path.getctime)
     _, name_file = os.path.split(latest_file)
     number, _ = os.path.splitext(name_file)
-    print(latest_file)
     name_number = int(number) + 1
 
     return name_number
@@ -101,7 +101,7 @@ def run():
 
     for img in segmented:
 
-        cv2.imwrite('./Base_datos/' + str(name_number) + '.jpg', img)
+        cv2.imwrite('./Prueba/' + str(name_number) + '.jpg', img)
         name_number = name_number + 1
 
 
