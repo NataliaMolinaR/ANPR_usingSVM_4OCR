@@ -4,7 +4,7 @@ import cv2
 
 def call_image():
 
-    file = './fuente/matricula_121.jpg'
+    file = './fuente/matricula_123.jpg'
     src = cv2.imread(file)
     name_number = pf.calculting_name()
 
@@ -28,7 +28,7 @@ def run():
 
     for img in segmented:
 
-        cv2.imwrite('./Prueba/' + str(name_number) + '.jpg', img)
+        cv2.imwrite('./Base_datos/' + str(name_number) + '.jpg', img)
         name_number = name_number + 1
 
 

@@ -6,7 +6,7 @@ import glob
 
 def calculting_name():
 
-    list_of_files = glob.glob('./Prueba/*') # * means all if need specific format then *.csv
+    list_of_files = glob.glob('./Base_datos/*') # * means all if need specific format then *.csv
     latest_file = max(list_of_files, key=os.path.getctime)
     _, name_file = os.path.split(latest_file)
     number, _ = os.path.splitext(name_file)
@@ -130,7 +130,7 @@ def filling_white(image, smaller_image):
     fil_int, col_int = rec_char_inter.shape[0:2]
 
     left_limit = 4
-    right_limit = col_out * 0.80
+    right_limit = col_out * 0.85
     up_limit = 5
     down_limit = fil_out * 0.95
     for n in range(0, fil_out):
