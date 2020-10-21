@@ -4,7 +4,7 @@ import cv2
 
 def call_image():
 
-    file = './fuente/matricula_123.jpg'
+    file = './fuente/matricula_251.jpg'
     src = cv2.imread(file)
     name_number = pf.calculting_name()
 
@@ -14,7 +14,7 @@ def call_image():
 def run():
 
     source, name_number = call_image()
-    no_noise = pf.softing_noise(source, 21)
+    no_noise = pf.softing_noise(source, 15)
     resize, image_tocut = pf.resizing(no_noise, source, 150)
     cv2.imshow('Plate', image_tocut)
     cv2.moveWindow('Plate', 20, 50)

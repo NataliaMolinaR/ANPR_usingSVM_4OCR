@@ -47,7 +47,7 @@ def threshold_image(image):
 
     thresh_image_inv = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, 15, 7)
 
-    thresh_image = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 21, 7)
+    thresh_image = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 15, 7)
     return thresh_image_inv, thresh_image
 
 
@@ -130,7 +130,7 @@ def filling_white(image, smaller_image):
     fil_int, col_int = rec_char_inter.shape[0:2]
 
     left_limit = 4
-    right_limit = col_out * 0.85
+    right_limit = col_out * 0.80
     up_limit = 5
     down_limit = fil_out * 0.95
     for n in range(0, fil_out):
