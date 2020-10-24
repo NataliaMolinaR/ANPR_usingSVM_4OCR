@@ -13,10 +13,8 @@ def reading_data():
     cv2.imshow('letter_origin', src)
     cv2.moveWindow('letter_origin', 20, 50)
 
-    src, _ = pif.resizing(src, src, 15)
+    src, _ = pif.resizing(src, src, 5)
 
-    width, height = src.shape[0:2]
-    print(width, height)
     cv2.imshow('letter', src)
     cv2.moveWindow('letter', 100, 50)
     cv2.waitKey(0)
@@ -24,15 +22,26 @@ def reading_data():
     return src
 
 
+def reducing_chanel(example):
+    gray = cv2.cvtColor(example, cv2.COLOR_BGR2GRAY)
+    thresh_img = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 15, 7)
+    return thresh_img
+
+
 def run():
 
-    data = reading_data()
-    data = data.reshape(-1)
-    print('Flatered', data)
-    with open('./data_base.csv', 'w') as file:
-        writer = csv.writer(file)
-        writer.writerow(data)
+    example = reading_data()
+    data = reducing_chanel(example)
 
+    data = data.reshape(-1)
+
+    tag = int(input('Escribe la etiqueta del caracter: '))
+
+    training_example = np.append(data, tag)
+
+    with open('./data_base.csv',  'a', newline='') as file:
+        writer = csv.writer(file, lineterminator='\n')
+        writer.writerow(training_example)
 
 if __name__ == '__main__':
     run()
