@@ -29,7 +29,7 @@ def reducing_chanel(example):
 def run():
     quantity_examplet = len(glob.glob('./Base_datos/*'))
     print(quantity_examplet)
-    for n in range(1206, quantity_examplet):
+    for n in range(1499, quantity_examplet + 1):
         print(n)
         example = reading_data(n)
         data = reducing_chanel(example)
