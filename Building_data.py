@@ -11,7 +11,8 @@ def reading_data(n):
     src = cv2.imread(file)
 
     src, _ = pif.resizing(src, src, 15)
-
+    h, w = src.shape[0:2]
+    print(h, w)
     cv2.imshow('Letra' + str(n), src)
     cv2.moveWindow('Letra' + str(n), 100, 50)
     cv2.waitKey(0)
@@ -27,9 +28,10 @@ def reducing_chanel(example):
 
 
 def run():
+
     quantity_examplet = len(glob.glob('./Base_datos/*'))
     print(quantity_examplet)
-    for n in range(1499, quantity_examplet + 1):
+    for n in range(442, quantity_examplet + 1):
         print(n)
         example = reading_data(n)
         data = reducing_chanel(example)
