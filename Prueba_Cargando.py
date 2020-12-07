@@ -15,23 +15,25 @@ def generate_data(rows, colum):
     lat2 = int(colum * 0.5)
     lat3 = colum
 
-    image_test[top1:top2, lat1:lat2] = 0
-    image_test[top1:top2, lat2:lat3] = 130
-    image_test[top2:top3, lat1:lat2] = 50
-    image_test[top2:top3, lat2:lat3] = 255
+    image_test[top1:top2, lat1:lat2] = 1
+    image_test[top1:top2, lat2:lat3] = 2
+    image_test[top2:top3, lat1:lat2] = 3
+    image_test[top2:top3, lat2:lat3] = 4
     print('Array', image_test)
     return image_test
 
 
 def run():
 
-    data = generate_data(4, 3)
-    data = data.reshape(-1)
-    print('Flatered', data)
-    with open('./prueba.csv', 'w') as file:
-        writer = csv.writer(file)
+    data = generate_data(4, 4)
+    with open('./prueba.csv', 'a', newline='') as file:
+        writer = csv.writer(file, lineterminator='\n')
+        writer.writerows(data)
 
-        writer.writerow(data)
+    data_new = np.loadtxt("./prueba.csv", delimiter=",", usecols=np.arange(0,2))
+    print('New array', data_new)
+    del data_new
+
 
 
 if __name__ == '__main__':
