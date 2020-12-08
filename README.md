@@ -28,6 +28,6 @@ In this repository you gonna find diferents files you could use:
 
 -  **Building_data**: this algorithim builds the data_base file. Take all the trainning examples and sort it in a matrix of n_smaple x n_features.  
 
-	 Note: in this repository I don't provide you the image to build this matrix. 
+	 Note: in this repository I don't provide you the character images to build this matrix. 
 
 - **Training_model**: this algorithim train the SVM model with data_base.csv.  
