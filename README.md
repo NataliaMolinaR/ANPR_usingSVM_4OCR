@@ -3,7 +3,7 @@
 Automatic Number Plate Reconigtion using SVM for OCR  is my work to qualify for electrical engineering degree. 🎓
 
 
--------------
+
 
 
 ##  📖 What is it about  ?
