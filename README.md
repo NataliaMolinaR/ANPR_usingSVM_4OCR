@@ -24,7 +24,7 @@ In this repository you gonna find diferents files you could use:
 
 - **Extraction**: this file allows you detect and extract plate's characters. You have to have a image that enclose perfectly the plate's rectangle and just that rectangle. 
 
--  **PPIF**: this is a little library with some processing image tecniques using OpenCV and other functions. 
+-  **PPIF**: (Pre Processing Image Functions) this is a little library with some processing image tecniques using OpenCV and other functions made by me. 
 
 -  **Building_data**: this algorithim builds the data_base file. Take all the trainning examples and sort it in a matrix of n_smaple x n_features.  
 
