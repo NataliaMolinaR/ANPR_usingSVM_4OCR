@@ -1,6 +1,6 @@
 # ANPR using SVM for OCR 🧠
 
-Automatic Number Plate Reconigtion using SVM for OCR  is my work to qualify for electrical engineering degree. 🎓
+Automatic Number Plate Reconigtion using SVM for Optical Character Reconigtion is my work to qualify for electrical engineering degree. 🎓
 
 
 
