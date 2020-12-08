@@ -3,12 +3,12 @@
 Automatic Number Plate Reconigtion using SVM for OCR  is my work to qualify for electrical engineering degree. 🎓
 
 
-
+-------------
 
 
 ###  📖 What is it about  ?
 
--------------
+
 
  This project use Computer Vision and Machine Learning to build an ANPR. Rather use Neural Network as is comonm, this work is implementing SVM as algorithm for Optical Character Reconigtion. 
  
@@ -18,7 +18,7 @@ Automatic Number Plate Reconigtion using SVM for OCR  is my work to qualify for 
 
 
 #### 🗃️ What you gonna find :
--------------
+
 
 In this repository you gonna find diferents files you could use:
 
