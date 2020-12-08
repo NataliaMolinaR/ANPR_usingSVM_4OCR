@@ -6,7 +6,7 @@ Automatic Number Plate Reconigtion using SVM for OCR  is my work to qualify for 
 -------------
 
 
-###  📖 What is it about  ?
+##  📖 What is it about  ?
 
 
 
@@ -17,12 +17,12 @@ Automatic Number Plate Reconigtion using SVM for OCR  is my work to qualify for 
 
 
 
-#### 🗃️ What you gonna find :
+## 🗃️ What you gonna find :
 
 
 In this repository you gonna find diferents files you could use:
 
-- ** Extraction**: this file allows you detect and extract plate's characters. You have to have a image that enclose perfectly the plate's rectangle and just that rectangle. 
+- **Extraction**: this file allows you detect and extract plate's characters. You have to have a image that enclose perfectly the plate's rectangle and just that rectangle. 
 
 -  **PPIF**: this is a little library with some processing image tecniques using OpenCV and other functions. 
 
