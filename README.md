@@ -31,3 +31,6 @@ In this repository you gonna find diferents files you could use:
 	 Note: in this repository I don't provide you the character images to build this matrix. 
 
 - **Training_model**: this algorithim train the SVM model with data_base.csv.  
+
+
+¡Any collab is well recieve!
