@@ -189,11 +189,19 @@ def cutting_characters(character, image_2cut):
 
         prep = filling_white(rec_char_outer, rec_char_inter)
 
+        height_w, width_w = prep.shape[0:2]
+        print(height_w, width_w)
+
+        prep, _ = resizing(prep, prep, 15)
+        # height_w, width_w = prep.shape[0:2]
+        # print(height_w, width_w)
+
         preparing.append(prep)
 
         if len(preparing) == m:
             for i in range(0, m):
-
+                # height_w, width_w = preparing[i].shape[0:2]
+                # print(height_w, width_w)
                 cv2.imshow('Character' + str(i), preparing[i])
                 cv2.moveWindow('Character' + str(i), 20 + i*120, 150)
             cv2.waitKey(0)
