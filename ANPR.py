@@ -5,6 +5,18 @@ import joblib
 import cv2
 from sklearn import svm
 
+def character2str(character):
+
+    int_character = character.astype(int)[0]
+
+    if int_character < 10:
+        str_character = str(int_character)
+    else:
+        str_character = chr(int_character + 55)
+    print('caracter', character, str_character)
+
+    return str_character
+
 
 def call_image():
 
@@ -31,7 +43,6 @@ def run():
 
         plate_str += str_character
 
-
         for i in range(0, len(characters)):
             cv2.imshow('Plate', plate)
             cv2.imshow('Character' + str(i), characters[i])
@@ -40,12 +51,6 @@ def run():
     print('La placa es:', plate_str)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
-
-
-
-
-
 
 
 if __name__ == '__main__':
