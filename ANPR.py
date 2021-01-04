@@ -15,30 +15,31 @@ def call_image():
 
 
 def run():
+
     image, name_number = call_image()
     plate = dp.searching_plate(image, name_number)
     characters = et.extraction(plate)
     svm_recon = joblib.load('modelo_entrenado.pkl')
-    info = []
+    plate_str = ''
 
     for segment in characters:
 
         data = segment.reshape(-1)
         character = svm_recon.predict([data])
-        print('caracter', character)
-        int_character = character.astype(int)[0]
-        info.append(str(int_character))
-        print(info)
+
+        str_character = character2str(character)
+
+        plate_str += str_character
+
 
         for i in range(0, len(characters)):
             cv2.imshow('Plate', plate)
             cv2.imshow('Character' + str(i), characters[i])
             cv2.moveWindow('Character' + str(i), 20 + i * 120, 250)
 
+    print('La placa es:', plate_str)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-
-
 
 
 
