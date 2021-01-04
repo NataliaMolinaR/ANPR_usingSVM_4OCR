@@ -82,8 +82,7 @@ def searching_plate(contour, image_print, plate_detected, number_file):
     for c in contour:
         x, y, w, h = cv2.boundingRect(c)
 
-        if (w <= width_max_plate) and (w >= width_min_plate):        # FILTERING THE RECTANGLE'S WIDTH
-            if (h <= height_max_plate) and (h >= height_min_plate):  # FILTERING THE RECTANGLE'S HEIGHT
+        if (w <= width_max_plate) and (w >= width_min_plate) and (h <= height_max_plate) and (h >= height_min_plate):  # FILTERING THE RECTANGLE'S HEIGHT
 
                 image_plate = cv2.rectangle(image_print, (x, y), (x + w, y + h), (0, 255, 0), 2)  #DRAWING THE PLATE'S RECTANGLE
                 plate_detected = True

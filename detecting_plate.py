@@ -28,7 +28,7 @@ def searching_plate(imagen, number_car):
     for c in contour:  # FIRST CASE
 
         plate_detected, plate = pif.searching_plate(contour, cut_src, plate_detected, num_file)
-
+        print('primer caso')
         # cv2.waitKey(0)
         break
 
@@ -43,6 +43,7 @@ def searching_plate(imagen, number_car):
             x, y, w, h = cv2.boundingRect(c)
 
             plate_detected, plate = pif.searching_plate(contour_dilated, cut_src, plate_detected, num_file)
+            print('Segundo caso')
 
             # cv2.waitKey(0)
             break
@@ -59,6 +60,7 @@ def searching_plate(imagen, number_car):
             x, y, w, h = cv2.boundingRect(c)
 
             plate_detected, plate = pif.searching_plate(contour, cut_src, plate_detected, num_file)
+            print('Tercer caso')
 
             # cv2.waitKey(0)
             break
