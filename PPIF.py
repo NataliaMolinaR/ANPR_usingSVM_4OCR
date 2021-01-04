@@ -109,9 +109,9 @@ def detecting_characters(contour, image_print, number_file):
             aspect_ratio = w / h
             if (area_contour/whole_area >= low_limit) and (area_contour/whole_area <= high_limit) and (aspect_ratio < max_aspect) and (aspect_ratio > min_aspect):
                 cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)  # DRAWING THE PLATE'S RECTANGLE
-                # print(w, h)
-                # cv2.imshow('Dibujando', image)
-                # cv2.waitKey(0)
+                print(w, h)
+                cv2.imshow('Dibujando', image)
+                cv2.waitKey(0)
                 rectangle_char = (x, y, w, h)                   # x = UPPER - LEFT CORNER OF THESE RECTANGLE
                 character.append(rectangle_char)                # FILLING THE CHARACTER VARIABLE.
 
@@ -190,22 +190,20 @@ def cutting_characters(character, image_2cut):
         prep = filling_white(rec_char_outer, rec_char_inter)
 
         height_w, width_w = prep.shape[0:2]
-        print(height_w, width_w)
 
         prep, _ = resizing(prep, prep, 15)
-        # height_w, width_w = prep.shape[0:2]
-        # print(height_w, width_w)
+
 
         preparing.append(prep)
 
-        if len(preparing) == m:
-            for i in range(0, m):
-                # height_w, width_w = preparing[i].shape[0:2]
-                # print(height_w, width_w)
-                cv2.imshow('Character' + str(i), preparing[i])
-                cv2.moveWindow('Character' + str(i), 20 + i*120, 150)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
+        # if len(preparing) == m:
+        #     for i in range(0, m):
+        #         # height_w, width_w = preparing[i].shape[0:2]
+        #         # print(height_w, width_w)
+        #         cv2.imshow('Character' + str(i), preparing[i])
+        #         cv2.moveWindow('Character' + str(i), 20 + i*120, 150)
+        #     cv2.waitKey(0)
+        #     cv2.destroyAllWindows()
     return preparing
 
 

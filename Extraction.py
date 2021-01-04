@@ -13,15 +13,14 @@ import cv2
 
 def extraction(source):
 
-    name_number = 1
-    no_noise = pf.softing_noise(source, 15)
-    resize, image_tocut = pf.resizing(no_noise, source, 150)
-    cv2.imshow('Plate', image_tocut)
-    cv2.moveWindow('Plate', 20, 50)
 
+    no_noise = pf.softing_noise(source, 11)
+    resize, image_tocut = pf.resizing(no_noise, source, 150)
     to_detect, to_cut = pf.threshold_image(resize)
     contour, _ = cv2.findContours(to_detect, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     detecting, character = pf.detecting_characters(contour, resize, _)
+
+
     character = pf.org_character(character)
     to_cut = pf.preparing_tocut(image_tocut)
     segmented = pf.cutting_characters(character, to_cut)

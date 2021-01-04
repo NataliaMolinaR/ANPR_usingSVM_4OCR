@@ -21,7 +21,7 @@ def character2str(character):
 
 def call_image():
 
-    file = './muestras/carro_6.jpg'
+    file = './muestras/carro_1.jpg'
     src = cv2.imread(file)
     name_number = pf.calculting_name()
     return src, name_number
