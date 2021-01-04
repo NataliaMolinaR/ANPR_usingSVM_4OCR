@@ -7,7 +7,7 @@ import PIF as pif
 path = 'C:\\Users\Sofia\Documents\Trabajo de grado\Proyecto\Programacion\Detecting-Object\Datos'  # Remember change me when you switch the computer
 
 
-def searching_plate(imagen, number_car):
+def detecting_plate(imagen, number_car):
 
     plate = []
     num_file = number_car
@@ -44,7 +44,6 @@ def searching_plate(imagen, number_car):
 
             plate_detected, plate = pif.searching_plate(contour_dilated, cut_src, plate_detected, num_file)
             print('Segundo caso')
-
             # cv2.waitKey(0)
             break
 

@@ -95,6 +95,9 @@ def searching_plate(contour, image_print, plate_detected, number_file):
                 # cv2.imshow('Plate detected number  ' + number_file, image_plate)
                 # cv2.moveWindow('Plate detected number  ' + number_file, 950, 20)
 
+        if not plate_detected:
+            plate = None
+
     return plate_detected, plate
 
 

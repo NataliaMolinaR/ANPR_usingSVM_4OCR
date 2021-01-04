@@ -5,6 +5,7 @@ import joblib
 import cv2
 from sklearn import svm
 
+
 def character2str(character):
 
     int_character = character.astype(int)[0]
@@ -29,7 +30,7 @@ def call_image():
 def run():
 
     image, name_number = call_image()
-    plate = dp.searching_plate(image, name_number)
+    plate = dp.detecting_plate(image, name_number)
     characters = et.extraction(plate)
     svm_recon = joblib.load('modelo_entrenado.pkl')
     plate_str = ''
@@ -38,9 +39,7 @@ def run():
 
         data = segment.reshape(-1)
         character = svm_recon.predict([data])
-
         str_character = character2str(character)
-
         plate_str += str_character
 
         for i in range(0, len(characters)):
