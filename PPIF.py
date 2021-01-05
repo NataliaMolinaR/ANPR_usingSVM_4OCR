@@ -109,9 +109,9 @@ def detecting_characters(contour, image_print, number_file):
             aspect_ratio = w / h
             if (area_contour/whole_area >= low_limit) and (area_contour/whole_area <= high_limit) and (aspect_ratio < max_aspect) and (aspect_ratio > min_aspect):
                 cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)  # DRAWING THE PLATE'S RECTANGLE
-                print(w, h)
-                cv2.imshow('Dibujando', image)
-                cv2.waitKey(0)
+                # print(w, h)
+                # cv2.imshow('Dibujando', image)
+                # cv2.waitKey(0)
                 rectangle_char = (x, y, w, h)                   # x = UPPER - LEFT CORNER OF THESE RECTANGLE
                 character.append(rectangle_char)                # FILLING THE CHARACTER VARIABLE.
 
