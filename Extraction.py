@@ -16,7 +16,7 @@ def extraction(source):
     character_kn = []
 
     for n_char in [7, 6]:
-        for kn_blr in [11, 15, 1]:
+        for kn_blr in [11, 15, 9, 1]:
 
             no_noise = pf.softing_noise(source, kn_blr)
             resize, image_tocut = pf.resizing(no_noise, source, 150)
