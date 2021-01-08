@@ -107,6 +107,7 @@ def detecting_characters(contour, image_print, number_file):
             x, y, w, h = cv2.boundingRect(c)
             area_contour = w * h
             aspect_ratio = w / h
+
             if (area_contour/whole_area >= low_limit) and (area_contour/whole_area <= high_limit) and (aspect_ratio < max_aspect) and (aspect_ratio > min_aspect):
                 cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)  # DRAWING THE PLATE'S RECTANGLE
                 # print(w, h)
