@@ -38,7 +38,7 @@ def character2str(character, plate_len, index):
 
 def call_image():
 
-    file = './fuente/matricula_234.jpg'
+    file = './fuente/matricula_92.jpg'
     src = cv2.imread(file)
     name_number = pf.calculting_name()
     return src, name_number
