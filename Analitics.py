@@ -2,7 +2,8 @@ import csv
 import numpy as np
 import cv2
 
-def cualquiervaina (character, counting_list):
+
+def str2num(character, counting_list):
     if ord(character) < ord('A'):
         counting_list[ord(character) - 48] += 1
     else:
@@ -13,7 +14,7 @@ with open('./Pruebas1_DB.csv', 'r', newline='') as file:
     reader = csv.reader(file, delimiter=";")
     fields = next(reader)
     notDetect = next(reader)
-    db = list(reader);
+    db = list(reader)
     detection_mistake = []
     characters_detected = [0] * 36
     characters_recognized = [0] * 36
@@ -31,12 +32,11 @@ with open('./Pruebas1_DB.csv', 'r', newline='') as file:
             diff = len(plate) - len(char_detect)
             detection_mistake.append(ID)
 
-        for i in range(0, len(char_recon)-1):
-            cualquiervaina(char_detect[i], characters_detected)
+        for i in range(0, len(char_detect)):
+            str2num(char_detect[i], characters_detected)
 
             if char_detect[i] == char_recon[i]:
-                cualquiervaina(char_recon[i], characters_recognized)
-
+                str2num(char_recon[i], characters_recognized)
 
     for i in range(0, len(characters_detected)-1):
         if characters_detected[i] != 0:
@@ -48,6 +48,8 @@ with open('./Pruebas1_DB.csv', 'r', newline='') as file:
 
     # print(characters_detected)
     print("Recognition sucess rate:", recogn_success)
+    print("Recognition sucess char detected", characters_detected)
+    print("Recognition sucess char reconigzed", characters_recognized)
     print("Recognition sucess rate p/char:", success_perchar)
     print("Detection sucess rate:", detection_success_rate, "IDs not detected:", detection_mistake)
 

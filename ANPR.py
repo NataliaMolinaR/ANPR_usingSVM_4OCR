@@ -38,7 +38,7 @@ def character2str(character, plate_len, index):
 
 def call_image():
 
-    file = './fuente/matricula_92.jpg'
+    file = './muestras/carro_5.jpg'
     src = cv2.imread(file)
     name_number = pf.calculting_name()
     return src, name_number
@@ -47,7 +47,7 @@ def call_image():
 def run():
 
     image, name_number = call_image()
-    # plate = dp.detecting_plate(image, name_number)
+    plate = dp.detecting_plate(image, name_number)
     plate = image
     characters = et.extraction(plate)
     svm_recon = joblib.load('modelo_entrenado1.pkl')
