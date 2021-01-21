@@ -6,11 +6,11 @@ import glob
 
 def calculting_name():
 
-    list_of_files = glob.glob('./Base_datos/*') # * means all if need specific format then *.csv
+    list_of_files = glob.glob('./muestras/*') # * means all if need specific format then *.csv
     latest_file = max(list_of_files, key=os.path.getctime)
     _, name_file = os.path.split(latest_file)
-    number, _ = os.path.splitext(name_file)
-    name_number = int(number) + 1
+    name, _ = os.path.splitext(name_file)
+    name_number = str(name)
 
     return name_number
 
@@ -107,6 +107,7 @@ def detecting_characters(contour, image_print, number_file):
             x, y, w, h = cv2.boundingRect(c)
             area_contour = w * h
             aspect_ratio = w / h
+
             if (area_contour/whole_area >= low_limit) and (area_contour/whole_area <= high_limit) and (aspect_ratio < max_aspect) and (aspect_ratio > min_aspect):
                 cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)  # DRAWING THE PLATE'S RECTANGLE
                 # print(w, h)
@@ -189,15 +190,21 @@ def cutting_characters(character, image_2cut):
 
         prep = filling_white(rec_char_outer, rec_char_inter)
 
+        height_w, width_w = prep.shape[0:2]
+
+        prep, _ = resizing(prep, prep, 15)
+
+
         preparing.append(prep)
 
-        if len(preparing) == m:
-            for i in range(0, m):
-
-                cv2.imshow('Character' + str(i), preparing[i])
-                cv2.moveWindow('Character' + str(i), 20 + i*120, 150)
-            cv2.waitKey(0)
-            cv2.destroyAllWindows()
+        # if len(preparing) == m:
+        #     for i in range(0, m):
+        #         # height_w, width_w = preparing[i].shape[0:2]
+        #         # print(height_w, width_w)
+        #         cv2.imshow('Character' + str(i), preparing[i])
+        #         cv2.moveWindow('Character' + str(i), 20 + i*120, 150)
+        #     cv2.waitKey(0)
+        #     cv2.destroyAllWindows()
     return preparing
 
 
