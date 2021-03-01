@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+""" This library is used for the plate detection and extraction"""
 
 def resizing_image(image):
     """It Reading image's dimensions which going to be resizing and proper cutting  it. Whether you want change the size
