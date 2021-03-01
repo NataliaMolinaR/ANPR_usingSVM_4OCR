@@ -3,6 +3,7 @@ import numpy as np
 
 """ This library is used for the plate detection and extraction"""
 
+
 def resizing_image(image):
     """It Reading image's dimensions which going to be resizing and proper cutting  it. Whether you want change the size
     of the picture you have to change te width_new parameter. At the bottom of this function are a little code where you

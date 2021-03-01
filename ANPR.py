@@ -6,6 +6,7 @@ import cv2
 
 
 def character2str(character, plate_len, index):
+    """This function transform the ID character to string text"""
 
     int_character = character.astype(int)[0]
 
@@ -37,6 +38,7 @@ def character2str(character, plate_len, index):
 
 
 def call_image():
+    """ This function call the image that will be used for recognition"""
 
     file = './muestras/carro_2.jpg'
     src = cv2.imread(file)
@@ -61,7 +63,7 @@ def run():
         str_character = character2str(character, plate_len, index)
         plate_str += str_character
 
-        for i in range(0, len(characters)):
+        for i in range(0, len(characters)): #Showing the character extraction results
             graf, _ = pf.resizing(plate, plate, 150)
             cv2.imshow('Plate', graf)
             cv2.imshow('Character' + str(i), characters[i])

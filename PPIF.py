@@ -6,7 +6,6 @@ import glob
 """ This library is used for the character detection and extraction"""
 
 def calculting_name():
-
     """ This function search ID number of the image that contains a plate number"""
 
     list_of_files = glob.glob('./muestras/*') # * means all if need specific format then *.csv
@@ -19,7 +18,6 @@ def calculting_name():
 
 
 def resizing(image, image_2, desire_width):
-
     """This function Resize the image in width and height using original aspect ratio. It use desire width for calculate the new height
 
     Besides, resizing returns the same image twice because the extraction module needs it for later image processing purposes."""
@@ -71,7 +69,6 @@ def dilating_image(image, kn, i):
 
 
 def estimation_area(image, width, height):
-
     """ This functions develops differents  area estimation that will be uses in the caracter detection
 
     There is particular characters that are out of common average:
@@ -103,7 +100,6 @@ def estimation_area(image, width, height):
 
 
 def detecting_characters(contour, image_print, number_file):
-
     """This function compare all the contours  values had found  with area_estimation values in order to filter them """
     character = []
     image = image_print.copy()
@@ -133,7 +129,6 @@ def detecting_characters(contour, image_print, number_file):
 
 
 def filling_white(image, smaller_image):
-
     """ This functions set white the pixels according to percents that it has asigned """
 
     rec_char_outer = image.copy()
@@ -154,13 +149,12 @@ def filling_white(image, smaller_image):
 
 
 def key_ordenation(tupla):
-
     """ This key indicates that it will be sort by the fisrt tupla's element. This element is the upper left x coordinate of the rectangle."""
+
     return tupla[0]
 
 
 def org_character(characters):
-
     """ This functions will sort the characters have found left to right using the key ordenation"""
 
     ord_characters = sorted(characters, key=key_ordenation)
@@ -168,7 +162,6 @@ def org_character(characters):
 
 
 def cutting_characters(character, image_2cut):
-
     """ In this functions develops the rectangles cut that contains every single character detected by using
     the coordinates given by  BoundingRectangle function"""
 
@@ -227,7 +220,6 @@ def cutting_characters(character, image_2cut):
 
 
 def preparing_tocut(image):
-
     """ This function  makes the treshhold in the entry image but use the non inverted treshold considering subsequent recognition processes"""
 
     _, image = threshold_image(image)
