@@ -2,15 +2,6 @@ import PPIF as pf
 import cv2
 
 
-# def call_image():
-#
-#     file = './fuente/matricula_251.jpg'
-#     src = cv2.imread(file)
-#     name_number = pf.calculting_name()
-#
-#     return src, name_number
-
-
 def extraction(source):
 
     character_kn = []

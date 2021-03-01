@@ -1,10 +1,5 @@
-import numpy as np
 import cv2
 import PIF as pif
-
-# Reading the image
-
-path = 'C:\\Users\Sofia\Documents\Trabajo de grado\Proyecto\Programacion\Detecting-Object\Datos'  # Remember change me when you switch the computer
 
 
 def detecting_plate(imagen, number_car):
@@ -25,14 +20,12 @@ def detecting_plate(imagen, number_car):
 
     contour = pif.finding_contours(thresh_image)
 
-    for c in contour:  # FIRST CASE
+    for c in contour:  # FIRST CASE SEARCHING THE PLATE RECTANGLE
 
         plate_detected, plate = pif.searching_plate(contour, cut_src, plate_detected, num_file)
-        # print('primer caso')
-        # cv2.waitKey(0)
         break
 
-    for kn in [3, 5, 7]:         # SECOND CASE: IT DILATING THE IMAGE'S CONTOURS TO SEARCH THE PLATE
+    for kn in [3, 5, 7]:         # SECOND CASE: THE IMAGE CONTOURS ARE EXPANDED TO FIND THE PLATE
 
         dilation = pif.dilating_image(thresh_image, kn, 1)
 
@@ -43,14 +36,12 @@ def detecting_plate(imagen, number_car):
             x, y, w, h = cv2.boundingRect(c)
 
             plate_detected, plate = pif.searching_plate(contour_dilated, cut_src, plate_detected, num_file)
-            # print('Segundo caso')
-            # cv2.waitKey(0)
             break
 
         if plate_detected:
             break
 
-    if not plate_detected:                     # THIRD CASE: REMOVE THE SOFFTING NOISE AND DILATING TO SEARCH THE PLATE
+    if not plate_detected:                     # THIRD CASE: REMOVE THE NOISE SMOOTHING AND DILATING TO SEARCH THE PLATE
 
         thresh_image, _ = pif.threshold_image(cut_src)
         contour = pif.finding_contours(thresh_image)
@@ -60,8 +51,6 @@ def detecting_plate(imagen, number_car):
 
             plate_detected, plate = pif.searching_plate(contour, cut_src, plate_detected, num_file)
             print('Tercer caso')
-
-            # cv2.waitKey(0)
             break
 
     return plate
