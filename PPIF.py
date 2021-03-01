@@ -6,6 +6,8 @@ import glob
 
 def calculting_name():
 
+    """ This function search ID number of the image that contains a plate number"""
+
     list_of_files = glob.glob('./muestras/*') # * means all if need specific format then *.csv
     latest_file = max(list_of_files, key=os.path.getctime)
     _, name_file = os.path.split(latest_file)
