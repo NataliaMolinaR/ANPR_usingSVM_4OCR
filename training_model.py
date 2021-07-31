@@ -27,8 +27,6 @@ def run():
     suport_vec = recon_char.support_vectors_
 
 
-    # print(w, b, num_suportv, suport_vec)
-
     joblib.dump(recon_char, 'modelo_entrenado1.pkl')
     modelo_cargado = joblib.load('modelo_entrenado1.pkl')
 

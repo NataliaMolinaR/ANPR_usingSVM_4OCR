@@ -11,7 +11,7 @@ def str2num(character, counting_list):
         counting_list[ord(character) - 55] += 1
 
 
-with open('./Prueba2_CN.csv', 'r', newline='') as file:
+with open('./Pruebas1_DB.csv', 'r', newline='') as file:
     reader = csv.reader(file, delimiter=";")
     fields = next(reader)
     notDetect = next(reader)
@@ -21,6 +21,7 @@ with open('./Prueba2_CN.csv', 'r', newline='') as file:
     characters_recognized = [0] * 36
     error = [0] * 36
     success_perchar = [0] * 36
+    total_chars = 0
     for row in db:
         data = row
         ID = data[0]
@@ -28,6 +29,7 @@ with open('./Prueba2_CN.csv', 'r', newline='') as file:
         char_detect = data[2]
         char_recon = data[3]
 
+        total_chars += len(plate)
         if len(plate) != len(char_detect):  # ID detection mistake
             diff = len(plate) - len(char_detect)
             detection_mistake.append(ID)
@@ -52,7 +54,7 @@ with open('./Prueba2_CN.csv', 'r', newline='') as file:
     print("Recognition sucess char reconigzed", characters_recognized)
     print("Recognition sucess rate p/char:", success_perchar)
     print("Detection sucess rate:", detection_success_rate, "IDs not detected:", detection_mistake)
-
+    print("Total chars:", total_chars)
     print('''\\begin{table}
 \centering
 \caption{Ejemplo}\label{Tab:producion}

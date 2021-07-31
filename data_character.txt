@@ -1,0 +1,3 @@
+Cantidad de caracteres detectados por placa reconocidas: 301
+Cantidad de caracteres detectados totales: 345
+Cantidad total de caracteres en la prueba:352
