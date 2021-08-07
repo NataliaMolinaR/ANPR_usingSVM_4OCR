@@ -51,10 +51,10 @@ def run():
 
     pis_time = time()
     image, name_number = call_image()
-    "plate = dp.detecting_plate(image, name_number)"
+    plate = dp.detecting_plate(image, name_number)
     try:
 
-        characters = et.extraction(image)
+        characters = et.extraction(plate)
         pif_time = time()
         svm_recon = joblib.load('modelo_entrenado1.pkl')
         plate_str = ''
